@@ -2,7 +2,7 @@
 
 A production-ready deployment of Meta's Llama 3.1 8B model for intelligent search query expansion on AWS EKS. The service improves search queries by expanding abbreviations, correcting spelling mistakes, and adding relevant context while maintaining the original search intent.
 
-## 🚀 Features
+## Features
 
 - **High-Performance Query Expansion** using Llama 3.1 8B Instruct
 - **Scalable AWS EKS Deployment** with auto-scaling based on CPU, memory, and latency
@@ -12,7 +12,7 @@ A production-ready deployment of Meta's Llama 3.1 8B model for intelligent searc
 - **Queue Management** using AWS SQS for high-load scenarios
 - **Load Testing** and performance optimization tools
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### System Requirements
 - **Operating System**: macOS, Linux, or WSL2 on Windows
@@ -43,7 +43,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 2. **AWS CLI** configured with credentials
 3. **Domain/Route53** (optional, for custom domains)
 
-## 🔑 Hugging Face Token Setup
+## Hugging Face Token Setup
 
 ### 1. Create Hugging Face Account and Token
 
@@ -87,13 +87,13 @@ from huggingface_hub import HfApi
 api = HfApi()
 try:
     model_info = api.model_info('meta-llama/Llama-3.1-8B-Instruct')
-    print('✅ Token is valid and model is accessible')
+    print('Token is valid and model is accessible')
 except Exception as e:
-    print(f'❌ Error: {e}')
+    print(f' Error: {e}')
 "
 ```
 
-## 🏠 Local Development Setup
+## Local Development Setup
 
 ### 1. Clone Repository
 ```bash
@@ -380,7 +380,7 @@ curl -X POST http://$EXTERNAL_IP/expand \
 curl http://$EXTERNAL_IP/metrics
 ```
 
-## 🧪 Production Testing
+## Production Testing
 
 ### 1. Integration Testing
 ```bash
@@ -420,7 +420,7 @@ curl -X POST http://$EXTERNAL_IP/expand \
 curl http://$EXTERNAL_IP/queue/status
 ```
 
-## 📊 Monitoring and Logging
+## Monitoring and Logging
 
 ### 1. Access MLflow UI
 ```bash
@@ -462,7 +462,7 @@ kubectl top nodes
 kubectl describe pod <pod-name>
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues and Solutions
 
@@ -557,7 +557,7 @@ kubectl exec -it <pod-name> -- /bin/bash
 kubectl port-forward service/llm-service 8080:80
 ```
 
-## 💰 Cost Management
+## Cost Management
 
 ### Expected Costs (us-west-2 region)
 - **EKS Cluster**: ~$73/month
@@ -574,7 +574,7 @@ kubectl port-forward service/llm-service 8080:80
 4. **Use S3 Intelligent Tiering** for model artifacts
 5. **Clean up resources** when not needed
 
-## 🗑️ Cleanup and Teardown
+## Cleanup and Teardown
 
 ### 1. Destroy AWS Resources
 ```bash
@@ -611,7 +611,7 @@ aws ec2 describe-instances --query 'Reservations[].Instances[?State.Name==`runni
 aws s3 ls | grep llm-query-expansion
 ```
 
-## 🚀 CI/CD Deployment
+## CI/CD Deployment
 
 ### 1. GitHub Actions Setup
 1. **Fork/clone** the repository
@@ -641,7 +641,7 @@ IMAGE_TAG=v1.0.1 ./scripts/deploy.sh
 ./scripts/deploy.sh
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **Llama 3.1 Model Card**: [meta-llama/Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct)
 - **AWS EKS Documentation**: [AWS EKS User Guide](https://docs.aws.amazon.com/eks/latest/userguide/)
@@ -649,7 +649,7 @@ IMAGE_TAG=v1.0.1 ./scripts/deploy.sh
 - **MLflow Documentation**: [mlflow.org](https://mlflow.org/docs/latest/index.html)
 - **FastAPI Documentation**: [fastapi.tiangolo.com](https://fastapi.tiangolo.com/)
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -660,11 +660,11 @@ IMAGE_TAG=v1.0.1 ./scripts/deploy.sh
 7. Push to the branch (`git push origin feature/amazing-feature`)
 8. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ⚠️ Important Notes
+## Important Notes
 
 - **Hugging Face Token**: Required for model access - ensure it's kept secure
 - **AWS Costs**: Monitor your AWS bill - ML workloads can be expensive
@@ -672,7 +672,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Security**: Never commit secrets to version control
 - **Resource Limits**: Ensure your AWS account has sufficient service limits
 
-## 🆘 Support
+## Support
 
 If you encounter issues:
 
@@ -686,4 +686,3 @@ If you encounter issues:
 
 ---
 
-**Happy querying! 🔍✨**
