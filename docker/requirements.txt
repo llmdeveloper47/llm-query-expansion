@@ -1,0 +1,45 @@
+# Core FastAPI and server dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# ML and model dependencies - compatible versions
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+transformers==4.36.2
+accelerate==0.25.0
+bitsandbytes==0.41.3.post2
+sentencepiece==0.1.99
+tokenizers==0.15.0
+
+# AWS dependencies
+boto3==1.34.34
+botocore==1.34.34
+awscli==1.32.34
+
+# Monitoring and logging
+mlflow==2.9.2
+prometheus-client==0.19.0
+
+# System monitoring
+psutil==5.9.6
+
+# HTTP client for health checks
+httpx==0.25.2
+requests==2.31.0
+
+# JSON handling and utilities
+orjson==3.9.10
+python-multipart==0.0.6
+
+# Optional optimization libraries
+optimum[onnxruntime]==1.16.2
+onnx==1.15.0
+onnxruntime==1.16.3
+
+# Development and testing (will be installed separately)
+# pytest==7.4.3
+# pytest-asyncio==0.21.1
+# aiohttp==3.9.1

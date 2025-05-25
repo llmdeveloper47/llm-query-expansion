@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-query-expansion
+  namespace: default
+  labels:
+    app: llm-query-expansion
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: llm-query-expansion
+  template:
+    metadata:
+      labels:
+        app: llm-query-expansion
+    spec:
+      serviceAccountName: llm-service-account
+      containers:
+      - name: llm-api
+        image: llm-query-expansion:latest
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: huggingface-token
+              key: token
+        - name: SQS_QUEUE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: aws-config
+              key: SQS_QUEUE_URL
+        envFrom:
+        - configMapRef:
+            name: llm-config
+        resources:
+          requests:
+            memory: "24Gi"
+            cpu: "6000m"
+          limits:
+            memory: "32Gi"
+            cpu: "8000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 300
+          periodSeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: model-cache
+          mountPath: /root/.cache
+      volumes:
+      - name: model-cache
+        emptyDir:
+          sizeLimit: 20Gi
+      nodeSelector:
+        node.kubernetes.io/instance-type: c5.4xlarge
+      tolerations:
+      - key: "compute-optimized"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: llm-service-account
+  namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: REPLACE_WITH_ROLE_ARN
